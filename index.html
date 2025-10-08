@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Sales Reporting Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Daily Sales Reporting Dashboard</h1>
+            <p>Track sales visits, machine repairs, and pipeline progress</p>
+        </header>
+
+        <div class="dashboard-grid">
+            <!-- Data Entry Form -->
+            <section class="data-entry">
+                <h2>Enter Sales Visit Data</h2>
+                <form id="salesForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="salesPerson">Sales Person Name *</label>
+                            <input type="text" id="salesPerson" name="salesPerson" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="visitDate">Date *</label>
+                            <input type="date" id="visitDate" name="visitDate" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="doctorName">Doctor Name *</label>
+                        <input type="text" id="doctorName" name="doctorName" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="doctorLocation">Doctor Location *</label>
+                            <input type="text" id="doctorLocation" name="doctorLocation" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="visitPurpose">Purpose of Visit *</label>
+                            <select id="visitPurpose" name="visitPurpose" required>
+                                <option value="">Select Purpose</option>
+                                <option value="Initial Contact">Initial Contact</option>
+                                <option value="Follow-up">Follow-up</option>
+                                <option value="Product Demo">Product Demo</option>
+                                <option value="Machine Repair">Machine Repair</option>
+                                <option value="Training">Training</option>
+                                <option value="Contract Discussion">Contract Discussion</option>
+                                <option value="Maintenance">Maintenance</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="pipelineStage">Sales Pipeline Stage *</label>
+                            <select id="pipelineStage" name="pipelineStage" required>
+                                <option value="">Select Stage</option>
+                                <option value="Lead">Lead</option>
+                                <option value="Prospect">Prospect</option>
+                                <option value="Qualified">Qualified</option>
+                                <option value="Proposal">Proposal</option>
+                                <option value="Negotiation">Negotiation</option>
+                                <option value="Closed Won">Closed Won</option>
+                                <option value="Closed Lost">Closed Lost</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="machineModel">Machine Model</label>
+                            <input type="text" id="machineModel" name="machineModel">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="machineName">Machine Name</label>
+                            <input type="text" id="machineName" name="machineName">
+                        </div>
+                        <div class="form-group">
+                            <label for="repairNotes">Machine Repair Notes</label>
+                            <textarea id="repairNotes" name="repairNotes" rows="2"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="visitNotes">Visit Notes</label>
+                        <textarea id="visitNotes" name="visitNotes" rows="3" placeholder="Any additional notes about the visit..."></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Add Visit Record</button>
+                        <button type="button" id="clearForm" class="btn btn-secondary">Clear Form</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Analytics Section -->
+            <section class="analytics">
+                <h2>Sales Analytics</h2>
+                
+                <div class="charts-grid">
+                    <div class="chart-container">
+                        <h3>Doctors Visited per Salesperson</h3>
+                        <canvas id="doctorsVisitedChart"></canvas>
+                    </div>
+
+                    <div class="chart-container">
+                        <h3>Machines Repaired per Salesperson</h3>
+                        <canvas id="machinesRepairedChart"></canvas>
+                    </div>
+
+                    <div class="chart-container">
+                        <h3>Doctors in Sales Pipeline Stages</h3>
+                        <canvas id="pipelineChart"></canvas>
+                    </div>
+
+                    <div class="chart-container">
+                        <h3>Visit Purpose Distribution</h3>
+                        <canvas id="purposeChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="controls">
+                    <button id="refreshCharts" class="btn btn-primary">Refresh Charts</button>
+                    <button id="exportData" class="btn btn-secondary">Export Data</button>
+                    <button id="clearData" class="btn btn-danger">Clear All Data</button>
+                </div>
+            </section>
+        </div>
+
+        <!-- Data Table -->
+        <section class="data-table">
+            <h2>Visit Records</h2>
+            <div class="table-container">
+                <table id="recordsTable">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Sales Person</th>
+                            <th>Doctor</th>
+                            <th>Location</th>
+                            <th>Purpose</th>
+                            <th>Pipeline Stage</th>
+                            <th>Machine Model</th>
+                            <th>Machine Name</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recordsTableBody">
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
